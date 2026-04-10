@@ -17,6 +17,7 @@ API.interceptors.request.use((req) => {
 export const authAPI = {
   signup: (data) => API.post('/auth/signup', data),
   verifyOtp: (data) => API.post('/auth/verify-otp', data),
+  login: (data) => API.post('/auth/login', data),
 };
 
 export const animeAPI = {

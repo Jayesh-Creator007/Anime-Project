@@ -1,49 +1,69 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-// import { Instagram } from 'lucide-react';
+import { MessageCircle, ExternalLink, Send } from 'lucide-react';
 
 const GetInTouch = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 min-h-[80vh] flex flex-col items-center justify-center">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center mb-12"
-      >
-        <h1 className="text-5xl font-black mb-4">GET IN <span className="text-primary">TOUCH</span></h1>
-        <p className="text-gray-500 text-lg">Connect with me on social media or send a direct message.</p>
-      </motion.div>
+    <div className="bg-black text-white min-h-screen pt-32">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-20"
+        >
+          <span className="text-primary font-black uppercase tracking-[0.4em] text-xs mb-4 inline-block">Connect with me</span>
+          <h1 className="text-7xl md:text-9xl font-black mb-8 tracking-tighter leading-none italic">
+            GET IN <br />
+            <span className="text-primary drop-shadow-[0_0_20px_rgba(255,215,0,0.4)]">TOUCH</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-400 max-w-2xl font-medium leading-relaxed mx-auto">
+            I'm always open to discussing new anime, projects, or creative opportunities.
+          </p>
+        </motion.div>
 
-      <div className="w-full max-w-md glass p-4 rounded-3xl border border-primary/20 shadow-2xl overflow-hidden">
-        {/* Placeholder for Instagram Embed/Iframe as per requirements */}
-        <div className="aspect-[3/4] w-full bg-accent rounded-2xl flex flex-col items-center justify-center relative overflow-hidden">
-          {/* Real Instagram Iframe (Mocked for this sandbox environment) */}
-          {/* <iframe 
-            src="https://www.instagram.com/p/C-fVaf7PDKrShbIP-bCr0A0/embed" 
-            className="w-full h-full border-0"
-            title="Instagram Profile"
-          ></iframe>
-           */}
-          {/* <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-            <Instagram className="w-16 h-16 text-primary mb-4" />
-            <a 
-              href="https://instagram.com/direct/inbox/" 
-              target="_blank" 
-              rel="noreferrer"
-              className="bg-primary text-black px-8 py-3 rounded-full font-bold"
-            >
-              Message Me
-            </a>
-          </div> */}
-        </div>
-      </div>
-      
-      <div className="mt-12 flex space-x-6">
-        <div className="flex flex-col items-center">
-          {/* <div className="w-12 h-12 rounded-full glass flex items-center justify-center mb-2 border border-primary/20">
-            <Instagram className="w-6 h-6 text-primary" />
-          </div> */}
-          {/* <span className="text-xs text-gray-500 uppercase tracking-widest font-bold">Instagram</span> */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8"
+        >
+          <a 
+            href="https://www.instagram.com/jayesh.aswani07/" 
+            target="_blank" 
+            rel="noreferrer"
+            className="bg-primary text-black px-12 py-6 rounded-3xl font-black text-2xl hover:bg-yellow-400 transition-all flex items-center group shadow-[0_0_30px_rgba(255,215,0,0.3)]"
+          >
+            VIEW INSTAGRAM <ExternalLink className="ml-3 w-7 h-7 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </a>
+          
+          <a 
+            href="https://ig.me/m/jayesh.aswani07" 
+            target="_blank" 
+            rel="noreferrer"
+            className="bg-white/5 border border-white/10 text-white px-12 py-6 rounded-3xl font-black text-2xl hover:bg-white/10 transition-all flex items-center group"
+          >
+            MESSAGE ME <MessageCircle className="ml-3 w-7 h-7 group-hover:scale-110 transition-transform text-primary" />
+          </a>
+        </motion.div>
+
+        {/* Decorative elements */}
+        <div className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-12 opacity-30">
+          <div className="flex flex-col items-center">
+            <Instagram className="w-8 h-8 mb-4" />
+            <span className="text-[10px] font-black uppercase tracking-widest">Social</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <Send className="w-8 h-8 mb-4" />
+            <span className="text-[10px] font-black uppercase tracking-widest">Direct</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <Star className="w-8 h-8 mb-4" />
+            <span className="text-[10px] font-black uppercase tracking-widest">Favorite</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <MessageCircle className="w-8 h-8 mb-4" />
+            <span className="text-[10px] font-black uppercase tracking-widest">Chat</span>
+          </div>
         </div>
       </div>
     </div>

@@ -12,10 +12,9 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Hash password before saving if provided
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password') || !this.password) return next();
+userSchema.pre('save', async function() {
+  if (!this.isModified('password') || !this.password) return;
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
 
 module.exports = mongoose.model('User', userSchema);

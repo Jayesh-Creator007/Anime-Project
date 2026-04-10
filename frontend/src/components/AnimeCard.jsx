@@ -21,57 +21,56 @@ const AnimeCard = ({ anime, onLike }) => {
 
   const handleTalk = () => {
     const message = encodeURIComponent(`Hey I also have watched ${anime.title}`);
-    // Instagram DM format (direct message to a user is harder without username, but we'll use a general intent or just the link)
-    // Using a generic IG link as per requirements
-    window.open(`https://www.instagram.com/direct/inbox/`, '_blank');
-    // Alternatively, if there was a specific username: https://ig.me/m/{username}?text={message}
+    window.open(`https://ig.me/m/jayesh.aswani07?text=${message}`, '_blank');
   };
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
-      className="glass rounded-2xl overflow-hidden yellow-glow transition-all duration-300 border border-white/5"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ y: -10, scale: 1.02 }}
+      className="glass rounded-3xl overflow-hidden yellow-glow transition-all duration-500 border border-white/10 group shadow-2xl"
     >
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-72 overflow-hidden">
         <img 
           src={anime.imageUrl} 
           alt={anime.title} 
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute top-3 right-3 glass px-2 py-1 rounded-lg text-xs font-bold text-primary">
+        <div className="absolute top-4 right-4 glass px-3 py-1.5 rounded-xl text-xs font-black text-primary uppercase tracking-widest shadow-lg">
           {anime.seasonsWatched} Seasons
         </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       </div>
       
-      <div className="p-5">
-        <h3 className="text-xl font-bold mb-2 text-white">{anime.title}</h3>
-        <p className="text-gray-400 text-sm mb-6 line-clamp-2">{anime.description}</p>
+      <div className="p-6">
+        <h3 className="text-2xl font-black mb-3 text-white tracking-tight group-hover:text-primary transition-colors">{anime.title}</h3>
+        <p className="text-gray-400 text-sm mb-8 line-clamp-2 leading-relaxed font-medium">{anime.description}</p>
         
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between border-t border-white/5 pt-6">
           <div className="flex space-x-3">
             <button 
               onClick={handleLike}
-              className="w-10 h-10 rounded-full glass border border-primary/20 flex items-center justify-center hover:bg-primary/20 transition-colors group"
+              className="w-12 h-12 rounded-2xl glass border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group/btn"
             >
-              <Heart className="w-5 h-5 text-primary group-hover:fill-primary" />
+              <Heart className="w-5 h-5 text-primary group-hover/btn:text-black group-hover/btn:fill-black" />
             </button>
             <button 
               onClick={handleWatch}
-              className="w-10 h-10 rounded-full glass border border-primary/20 flex items-center justify-center hover:bg-primary/20 transition-colors group"
+              className="w-12 h-12 rounded-2xl glass border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group/btn"
             >
-              <Play className="w-5 h-5 text-primary group-hover:fill-primary" />
+              <Play className="w-5 h-5 text-primary group-hover/btn:text-black group-hover/btn:fill-black" />
             </button>
             <button 
               onClick={handleTalk}
-              className="w-10 h-10 rounded-full glass border border-primary/20 flex items-center justify-center hover:bg-primary/20 transition-colors group"
+              className="w-12 h-12 rounded-2xl glass border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group/btn"
             >
-              <MessageCircle className="w-5 h-5 text-primary group-hover:fill-primary" />
+              <MessageCircle className="w-5 h-5 text-primary group-hover/btn:text-black group-hover/btn:fill-black" />
             </button>
           </div>
-          <div className="text-xs text-gray-500 font-medium">
-            {anime.likes} Likes • {anime.views} Views
+          <div className="text-right">
+            <div className="text-lg font-black text-white leading-none">{anime.likes}</div>
+            <div className="text-[10px] text-gray-500 uppercase font-black tracking-widest">Likes</div>
           </div>
         </div>
       </div>

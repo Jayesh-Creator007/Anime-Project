@@ -6,6 +6,7 @@ import About from './pages/About';
 import AnimeList from './pages/AnimeList';
 import GetInTouch from './pages/GetInTouch';
 import Signup from './pages/Signup';
+import Login from './pages/Login';
 import VerifyOtp from './pages/VerifyOtp';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminAnimeData from './pages/AdminAnimeData';
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/anime" element={<AnimeList />} />
           <Route path="/contact" element={<GetInTouch />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/verify-otp" element={<VerifyOtp />} />
           
           {/* Admin Routes */}

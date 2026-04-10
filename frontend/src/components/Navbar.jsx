@@ -8,48 +8,52 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass border-b border-primary/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-primary tracking-tighter">
-              ANIME<span className="text-white">TRACKER</span>
-            </Link>
-          </div>
+    <nav className="fixed top-0 w-full z-[100] bg-black/80 backdrop-blur-xl border-b border-white/10 py-4">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="flex items-center space-x-12">
+          <Link to="/" className="text-3xl font-black text-primary tracking-tighter hover:scale-105 transition-transform">
+            ANIME<span className="text-white">TRACKER</span>
+          </Link>
           
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-              <Link to="/anime" className="hover:text-primary transition-colors">Anime List</Link>
-              <Link to="/about" className="hover:text-primary transition-colors">About</Link>
-              <Link to="/contact" className="hover:text-primary transition-colors">Get in Touch</Link>
-            </div>
+          <div className="hidden md:flex items-center space-x-10">
+            <Link to="/" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Home</Link>
+            <Link to="/anime" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Anime List</Link>
+            <Link to="/about" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">About</Link>
+            <Link to="/contact" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Get in Touch</Link>
           </div>
+        </div>
 
-          <div className="flex items-center space-x-4">
-            {user ? (
-              <>
-                {isAdmin && (
-                  <Link to="/admin" className="p-2 hover:bg-primary/10 rounded-full transition-colors">
-                    <LayoutDashboard className="w-5 h-5 text-primary" />
-                  </Link>
-                )}
-                <button 
-                  onClick={logout}
-                  className="p-2 hover:bg-primary/10 rounded-full transition-colors text-gray-400 hover:text-white"
-                >
-                  <LogOut className="w-5 h-5" />
-                </button>
-              </>
-            ) : (
+        <div className="flex items-center space-x-6">
+            {!user && (
               <Link 
-                to="/signup" 
-                className="bg-primary text-black px-4 py-1.5 rounded-full font-semibold hover:bg-yellow-400 transition-colors"
+                to="/login" 
+                className="text-sm font-black uppercase tracking-widest text-gray-400 hover:text-white transition-colors"
               >
-                Sign Up
+                Log In
               </Link>
             )}
-          </div>
+            {user ? (
+            <div className="flex items-center space-x-4">
+              {isAdmin && (
+                <Link to="/admin" className="p-3 bg-white/5 hover:bg-primary/10 rounded-2xl transition-all group">
+                  <LayoutDashboard className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
+                </Link>
+              )}
+              <button 
+                onClick={logout}
+                className="p-3 bg-white/5 hover:bg-red-500/10 rounded-2xl transition-all group text-gray-400 hover:text-red-500"
+              >
+                <LogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+              </button>
+            </div>
+          ) : (
+            <Link 
+              to="/signup" 
+              className="bg-primary text-black px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-yellow-400 hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,215,0,0.3)]"
+            >
+              Sign Up
+            </Link>
+          )}
         </div>
       </div>
     </nav>

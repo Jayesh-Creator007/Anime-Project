@@ -9,9 +9,11 @@ const generateToken = (id) => {
 
 // Signup
 exports.signup = async (req, res) => {
+  console.log('Signup Request Body:', req.body);
   const { username, email } = req.body;
   try {
     let user = await User.findOne({ email });
+    console.log('User found:', user ? user.email : 'No user found');
     
     // Create or update user
     if (!user) {
@@ -42,6 +44,7 @@ exports.signup = async (req, res) => {
     
     res.json({ message: 'OTP sent to your email' });
   } catch (error) {
+    console.error('Signup Error:', error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -59,6 +62,12 @@ exports.verifyOtp = async (req, res) => {
     user.isVerified = true;
     user.otp = undefined;
     user.otpExpires = undefined;
+
+    // Set admin role for specific email
+    if (user.email === 'aswanijayesh500@gmail.com') {
+      user.role = 'admin';
+    }
+
     await user.save();
     
     res.json({
