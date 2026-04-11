@@ -3,15 +3,19 @@ import { Heart, Play, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { animeAPI } from '../api';
 import { toast } from 'react-toastify';
+import { useAuth } from '../context/AuthContext';
 
 const AnimeCard = ({ anime, onLike }) => {
+  const { user } = useAuth();
+  const isLiked = anime.likedBy?.includes(user?._id);
+
   const handleLike = async () => {
     try {
-      await animeAPI.like(anime._id);
+      const { data } = await animeAPI.like(anime._id);
       onLike();
-      toast.success(`Liked ${anime.title}!`);
+      toast.success(data.message);
     } catch (error) {
-      toast.error('Failed to like anime');
+      toast.error('Failed to update like');
     }
   };
 
@@ -38,7 +42,7 @@ const AnimeCard = ({ anime, onLike }) => {
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute top-4 right-4 glass px-3 py-1.5 rounded-xl text-xs font-black text-primary uppercase tracking-widest shadow-lg">
-          {anime.seasonsWatched} Seasons
+          {anime.type === 'movie' ? 'Movie' : `${anime.seasonsWatched} Seasons`}
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       </div>
@@ -51,9 +55,9 @@ const AnimeCard = ({ anime, onLike }) => {
           <div className="flex space-x-3">
             <button 
               onClick={handleLike}
-              className="w-12 h-12 rounded-2xl glass border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group/btn"
+              className={`w-12 h-12 rounded-2xl glass border border-white/10 flex items-center justify-center transition-all group/btn ${isLiked ? 'bg-primary border-primary' : 'hover:bg-primary hover:border-primary'}`}
             >
-              <Heart className="w-5 h-5 text-primary group-hover/btn:text-black group-hover/btn:fill-black" />
+              <Heart className={`w-5 h-5 transition-colors ${isLiked ? 'text-black fill-black' : 'text-primary group-hover/btn:text-black group-hover/btn:fill-black'}`} />
             </button>
             <button 
               onClick={handleWatch}

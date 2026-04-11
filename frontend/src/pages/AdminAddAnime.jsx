@@ -9,6 +9,7 @@ const AdminAddAnime = () => {
     title: '',
     description: '',
     imageUrl: '',
+    type: 'series',
     seasonsWatched: 0
   });
   const [loading, setLoading] = useState(false);
@@ -46,6 +47,25 @@ const AdminAddAnime = () => {
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
+            <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-3 ml-2">Content Type</label>
+            <div className="flex space-x-4">
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, type: 'series' })}
+                className={`flex-1 py-4 rounded-2xl font-black transition-all border ${formData.type === 'series' ? 'bg-primary text-black border-primary shadow-[0_0_20px_rgba(255,215,0,0.3)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'}`}
+              >
+                SERIES
+              </button>
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, type: 'movie' })}
+                className={`flex-1 py-4 rounded-2xl font-black transition-all border ${formData.type === 'movie' ? 'bg-primary text-black border-primary shadow-[0_0_20px_rgba(255,215,0,0.3)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'}`}
+              >
+                MOVIE
+              </button>
+            </div>
+          </div>
+          <div>
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Anime Title</label>
             <input 
               name="title"
@@ -81,17 +101,19 @@ const AdminAddAnime = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Seasons Watched</label>
-            <input 
-              name="seasonsWatched"
-              type="number" 
-              min="0"
-              className="w-full bg-accent border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:border-primary transition-all"
-              value={formData.seasonsWatched}
-              onChange={handleChange}
-            />
-          </div>
+          {formData.type === 'series' && (
+            <div>
+              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-3 ml-2">Seasons Watched</label>
+              <input 
+                name="seasonsWatched"
+                type="number" 
+                min="0"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:outline-none focus:border-primary transition-all font-bold"
+                value={formData.seasonsWatched}
+                onChange={handleChange}
+              />
+            </div>
+          )}
           
           <button 
             type="submit" 

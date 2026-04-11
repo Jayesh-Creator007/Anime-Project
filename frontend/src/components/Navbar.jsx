@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { User, LogOut, LayoutDashboard } from 'lucide-react';
+import { User, LogOut, LayoutDashboard, PlusCircle } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout, isAdmin } = useAuth();
@@ -12,15 +12,26 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <div className="flex items-center space-x-12">
           <Link to="/" className="text-3xl font-black text-primary tracking-tighter hover:scale-105 transition-transform">
-            ANIME<span className="text-white">TRACKER</span>
+            {isAdmin ? (
+              <>HELLO <span className="text-white">ADMIN</span></>
+            ) : (
+              <>ANIME<span className="text-white">TRACKER</span></>
+            )}
           </Link>
           
-          <div className="hidden md:flex items-center space-x-10">
-            <Link to="/" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Home</Link>
-            <Link to="/anime" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Anime List</Link>
-            <Link to="/about" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">About</Link>
-            <Link to="/contact" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Get in Touch</Link>
-          </div>
+          {user && (
+            <div className="hidden md:flex items-center space-x-10">
+              <Link to="/" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Home</Link>
+              <Link to="/anime" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Anime List</Link>
+              {isAdmin && (
+                <Link to="/admin/add" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors flex items-center">
+                  <PlusCircle className="w-4 h-4 mr-2" /> Add Anime
+                </Link>
+              )}
+              <Link to="/about" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">About</Link>
+              <Link to="/contact" className="text-sm font-black uppercase tracking-[0.2em] text-gray-400 hover:text-primary transition-colors">Get in Touch</Link>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center space-x-6">

@@ -18,7 +18,9 @@ const Signup = () => {
       toast.success('OTP sent to your email!');
       navigate('/verify-otp', { state: { email } });
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Signup failed');
+      console.error('FRONTEND_SIGNUP_ERROR:', error);
+      const serverMessage = error.response?.data?.message;
+      toast.error(serverMessage || 'Signup failed - Check console');
     } finally {
       setLoading(false);
     }

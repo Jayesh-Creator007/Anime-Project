@@ -28,9 +28,9 @@ exports.getAnimeById = async (req, res) => {
 
 // Create anime
 exports.createAnime = async (req, res) => {
-  const { title, description, imageUrl, seasonsWatched } = req.body;
+  const { title, description, imageUrl, seasonsWatched, type } = req.body;
   try {
-    const anime = new Anime({ title, description, imageUrl, seasonsWatched });
+    const anime = new Anime({ title, description, imageUrl, seasonsWatched, type });
     const savedAnime = await anime.save();
     res.status(201).json(savedAnime);
   } catch (error) {
@@ -64,9 +64,22 @@ exports.likeAnime = async (req, res) => {
     const anime = await Anime.findById(req.params.id);
     if (!anime) return res.status(404).json({ message: 'Anime not found' });
     
-    anime.likes += 1;
-    await anime.save();
-    res.json(anime);
+    // Check if user already liked
+    const alreadyLiked = anime.likedBy.includes(req.user._id);
+    
+    if (alreadyLiked) {
+      // Unlike logic
+      anime.likedBy = anime.likedBy.filter(id => id.toString() !== req.user._id.toString());
+      anime.likes = Math.max(0, anime.likes - 1);
+      await anime.save();
+      return res.json({ message: 'Like removed', anime });
+    } else {
+      // Like logic
+      anime.likedBy.push(req.user._id);
+      anime.likes += 1;
+      await anime.save();
+      return res.json({ message: 'Anime liked', anime });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

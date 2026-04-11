@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { animeAPI } from '../api';
 import { Trash2, Edit } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const AdminAnimeData = () => {
   const [animes, setAnimes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchAnimes();
@@ -63,7 +65,10 @@ const AdminAnimeData = () => {
                   <td className="px-6 py-4 font-medium">{anime.likes}</td>
                   <td className="px-6 py-4 font-medium">{anime.views}</td>
                   <td className="px-6 py-4 text-right">
-                    <button className="p-2 hover:bg-blue-500/20 text-blue-400 rounded-lg mr-2 transition-colors">
+                    <button 
+                      onClick={() => navigate(`/admin/edit/${anime._id}`)}
+                      className="p-2 hover:bg-blue-500/20 text-blue-400 rounded-lg mr-2 transition-colors"
+                    >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button 

@@ -11,6 +11,7 @@ import VerifyOtp from './pages/VerifyOtp';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminAnimeData from './pages/AdminAnimeData';
 import AdminAddAnime from './pages/AdminAddAnime';
+import AdminEditAnime from './pages/AdminEditAnime';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
 import { LayoutDashboard, Database, PlusCircle } from 'lucide-react';
@@ -38,19 +39,25 @@ const App = () => {
         )}
         
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/anime" element={<AnimeList />} />
-          <Route path="/contact" element={<GetInTouch />} />
+          {/* Public Auth Routes */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify-otp" element={<VerifyOtp />} />
+          
+          {/* Protected Main Routes */}
+          <Route element={<ProtectedRoute adminOnly={false} />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/anime" element={<AnimeList />} />
+            <Route path="/contact" element={<GetInTouch />} />
+          </Route>
           
           {/* Admin Routes */}
           <Route element={<ProtectedRoute adminOnly={true} />}>
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/data" element={<AdminAnimeData />} />
             <Route path="/admin/add" element={<AdminAddAnime />} />
+            <Route path="/admin/edit/:id" element={<AdminEditAnime />} />
           </Route>
         </Routes>
       </Layout>
