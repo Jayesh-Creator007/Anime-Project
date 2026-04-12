@@ -39,7 +39,7 @@ const App = () => {
         )}
         
         <Routes>
-          {/* Public Auth Routes */}
+          
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify-otp" element={<VerifyOtp />} />

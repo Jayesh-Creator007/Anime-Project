@@ -12,13 +12,13 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: '*', // Allow all origins for development
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 
-// Log all requests
+
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 app.use('/api/anime', animeRoutes);
 app.use('/api/auth', authRoutes);
 
-// Error Handling Middleware
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: err.message });
